@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideShow</title>
+    <style>
+        #container{
+            width: 1000px;
+            height: 300px;
+            padding: 10px;
+            text-align: center;
+            background-color: rgb(245, 206, 244);
+            
+        }
+        img{
+            border: 3px solid rgb(52, 48, 48);
+            width: 50%;
+            height: 90%;
+            border-radius: 10px;
+        }
+        #button{
+            display: flex;
+            justify-content: space-around;
+            width: 1000px;
+        }
+        #button button{
+            width: 150px;
+            height: 30px;
+            border-radius: 5px;
+            font-family: Candara;
+            font-size: 18px;
+            background-color: teal;
+            color: white;
+            font-weight: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        
+    </div>
+    <div id="button">
+        <button id="prev" onclick="Handleprev()">Prev</button>
+        <button id="next" onclick="Handlenext()">Next</button>
+        <button id="StartStop" onclick="HandlestartStop()">Start</button>
+    </div>
+    
+    
+</body>
+<script>
+    let Imgarray = ["https://tse4.mm.bing.net/th?id=OIP.ErAiMih0ltX9nxzgEbfN0gHaEp&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.Met_wGkMcwd1-a8nD455gwHaFj&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.pMbaUypN-gfPjxsY6R0gLAHaFj&pid=Api&P=0&h=220",
+                    "https://tse3.mm.bing.net/th?id=OIP.Vs_2eCJxL07L2s1i5wy7vgHaFj&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.D9rai0w5P4kw9H9jWYeZgwHaEo&pid=Api&P=0&h=220",
+                    "https://tse1.mm.bing.net/th?id=OIP.TrAbbR3oGA_Ban6kV98t0AHaE6&pid=Api&P=0&h=220",
+                    "https://tse2.mm.bing.net/th?id=OIP.G12T_MUuIKWw7XklDIqzhwHaE8&pid=Api&P=0&h=220",
+                    "https://tse2.mm.bing.net/th?id=OIP.nYEuBjiuwCD6oR2JeVu5DwHaEK&pid=Api&P=0&h=220",
+                    "https://tse3.mm.bing.net/th?id=OIP.roeJGz3eeyhxK3XRQ0LxpQHaFj&pid=Api&P=0&h=220",
+                    "https://tse1.mm.bing.net/th?id=OIP.R2-5KmtS5lHF74j1r-1bjgHaEK&pid=Api&P=0&h=220",
+                    "https://tse2.mm.bing.net/th?id=OIP.eN7hea_oY8MyFyOluzTBAQHaFj&pid=Api&P=0&h=220",
+                    "https://tse3.mm.bing.net/th?id=OIP.LXSlfxdcsAgh_kova3aaZgHaEc&pid=Api&P=0&h=220",
+                    "https://tse1.mm.bing.net/th?id=OIP.d1M7zl5O9mBUS6l4O9xJeQHaEK&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.in-rq_bF6Lh7HbKhwl-Q8wHaFj&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.-s3Cgb_iEBm0oW5gkCxr0wHaFj&pid=Api&P=0&h=220",
+                    "https://tse3.mm.bing.net/th?id=OIP.smuSqtIH6EnZzaJYHgqq6wHaFj&pid=Api&P=0&h=220",
+                    "https://tse1.mm.bing.net/th?id=OIP.uhIzKFl_cPCmKFDAZ6Cg2gHaKb&pid=Api&P=0&h=220",
+                    "https://tse2.mm.bing.net/th?id=OIP.-e0epO-s-ITe_GW1CvZwZgHaEo&pid=Api&P=0&h=220",
+                    "https://tse3.mm.bing.net/th?id=OIP.llFZo8-5hp8oejjpMi9ZygHaE8&pid=Api&P=0&h=220",
+                    "https://tse4.mm.bing.net/th?id=OIP.0H_Yr1Qi8uB3BHYLZv_0SQHaE8&pid=Api&P=0&h=220"];
+    let i = 0;
+    let IntervalId;
+    let btn = document.getElementById("StartStop");
+    
+    function displayImg(index){
+        
+        let Container = document.getElementById("container");
+        let img = document.createElement("img");
+        Container.innerHTML = "";
+        img.src = Imgarray[index];
+        Container.append(img);
+    }
+
+    function StartSlideshow(){
+            IntervalId = setInterval(()=>{
+            Handlenext()
+                }  , 2000);
+        btn.innerText = "Stop"
+
+        
+    }
+    function StopSlideshow(){
+        clearInterval(IntervalId);
+        btn.innerText = "Start"
+    }
+
+    function Handleprev(){
+        if (i == 0){
+            i = Imgarray.length;
+        }
+        i = i-1;
+        console.log(i)
+        displayImg(i)
+    }
+    
+
+    function Handlenext(){
+        if (i == Imgarray.length -1){
+            i = 0;
+        }
+        i = i+1;
+        console.log(i)
+        displayImg(i)
+        
+    }
+
+    function HandlestartStop(){
+        if (IntervalId) {
+            StopSlideshow();
+        } else {
+            StartSlideshow();
+        }
+    }
+
+   
+    displayImg(0);
+    
+    
+
+
+</script>
+</html>
